@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <nav>
+        <a class="home-btn"><i class="fa-solid fa-house-chimney"></i>&nbsp; NewsSelect</a>
+        <ul class="un-list topnav" id="myTopnav">
+            <li><a  href="{% url 'article-misc' %}" class="list-item" rel="noopener noreferrer">Miscellaneous</a></li>
+            <li><a  href="{% url 'article-world' %}" class="list-item" rel="noopener noreferrer">World</a></li>
+            <li><a  href="{% url 'article-pol' %}" class="list-item"  rel="noopener noreferrer">Politics</a></li>
+            <li><a  href="{% url 'article-tech' %}" class="list-item" rel="noopener noreferrer">Technology</a></li>
+        </ul>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i></a>
+    </nav>
+
+    <div class="container-content">
+        <label for="list1" style="margin-left: 10px;">Filter:</label>
+        <div id="list1" class="dropdown-check-list" tabindex="100">
+            <span class="anchor">Select Publisher</span>
+            <ul class="dd-items" id="filter-options">
+                
+                <li><label><input type="checkbox" value="hindustantimes">&nbsp;Hindustan Times</label></li>
+                <li><label><input type="checkbox" value="thenewsminute">&nbsp;The News Minute</label></li>
+                <li><label><input type="checkbox" value="news18">&nbsp;News18</label></li>
+                <li><label><input type="checkbox" value="reuters">&nbsp;Reuters</label></li>
+                <li><label><input type="checkbox" value="aninews">&nbsp;Ani News</label></li>
+                <li><label><input type="checkbox" value="theprint">&nbsp;The Print</label></li>
+                <li><label><input type="checkbox" value="independent">&nbsp;Independent</label></li>
+                <li><label><input type="checkbox" value="timesnow">&nbsp;Times Now</label></li>
+                
+            </ul>
+        </div>
+        <div class="container" id="content">
+            {% for article in articles %}
+            <div class="items">
+                <div class="img" style="background-image: url('{{ article.image_url }}');">
+                </div>
+                <div class="date"><p><b>{{ article.date }}</b> &nbsp;{{ article.time }}</p></div>
+                <div class="head">{{ article.headline }}</div>
+                <div class="text">{{ article.text }}</div>
+                <a href="{{ article.read_more_url }}" ,target='_blank' class="rm-btn">Read More</a>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    <script src="{% static 'script.js' %}"></script>
+</body>
+
+</html>
